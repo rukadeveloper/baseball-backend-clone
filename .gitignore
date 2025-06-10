@@ -1,0 +1,15 @@
+# 빌드 결과물 무시
+/build/
+/out/
+
+# IDE 설정 무시
+/.idea/
+/.vscode/
+/application.properties
+
+# OS별 무시 파일
+.DS_Store
+Thumbs.db
+
+# 환경 변수 파일 무시
+.env
