@@ -33,6 +33,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/login/data")
     public ApiResponseDTO<LoginResponseDTO> getLoginData() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
