@@ -53,7 +53,7 @@ public class SecurityConfig {
         http.csrf((auth) -> auth.disable());
         http.formLogin((auth) -> auth.disable());
         http.httpBasic((auth) -> auth.disable());
-        http.authorizeHttpRequests((auth) -> auth.requestMatchers("/login","/","/join","/login/data").permitAll()
+        http.authorizeHttpRequests((auth) -> auth.requestMatchers("/login","/","/join","/login/data","/nest/check/id").permitAll()
                 .requestMatchers("/admin").hasRole("ADMIN").anyRequest().authenticated());
         http.addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
         http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
