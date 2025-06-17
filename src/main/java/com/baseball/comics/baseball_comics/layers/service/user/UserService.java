@@ -38,4 +38,12 @@ public class UserService {
 
         return new JoinResponseDTO(true, userEntity);
     }
+
+    public Boolean nestCheck(String uid) {
+        Boolean isExist = userJpaRepository.existsByUid(uid);
+        if(isExist) {
+            return false;
+        }
+        return true;
+    }
 }

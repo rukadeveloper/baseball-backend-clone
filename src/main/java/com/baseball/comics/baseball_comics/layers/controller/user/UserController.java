@@ -2,9 +2,7 @@ package com.baseball.comics.baseball_comics.layers.controller.user;
 
 import com.baseball.comics.baseball_comics.layers.dto.common.ApiResponseDTO;
 import com.baseball.comics.baseball_comics.layers.dto.common.MessageType;
-import com.baseball.comics.baseball_comics.layers.dto.join.JoinDTO;
-import com.baseball.comics.baseball_comics.layers.dto.join.JoinResponseDTO;
-import com.baseball.comics.baseball_comics.layers.dto.join.LoginResponseDTO;
+import com.baseball.comics.baseball_comics.layers.dto.join.*;
 import com.baseball.comics.baseball_comics.layers.repository.User.UserEntity;
 import com.baseball.comics.baseball_comics.layers.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -47,5 +45,12 @@ public class UserController {
         String role = auth.getAuthority();
 
         return ApiResponseDTO.success(MessageType.RETRIEVE, new LoginResponseDTO(username, role));
+    }
+
+    @PostMapping("/nest/check/id")
+    public ApiResponseDTO<NestCheckResponseDTO> checkIdNested(NestCheckDTO nestCheckDTO) {
+        Boolean isExisted = userService.nestCheck(nestCheckDTO.getUid());
+
+        return ApiResponseDTO.success(MessageType.RETRIEVE, new NestCheckResponseDTO(isExisted));
     }
 }
