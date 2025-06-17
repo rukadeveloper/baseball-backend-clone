@@ -3,8 +3,6 @@ package com.baseball.comics.baseball_comics.layers.config;
 import com.baseball.comics.baseball_comics.layers.jwt.JWTFilter;
 import com.baseball.comics.baseball_comics.layers.jwt.JWTUtil;
 import com.baseball.comics.baseball_comics.layers.jwt.LoginFilter;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -55,9 +53,8 @@ public class SecurityConfig {
         http.httpBasic((auth) -> auth.disable());
         http.authorizeHttpRequests((auth) -> auth.requestMatchers("/login","/","/join","/login/data","/nest/check/id").permitAll()
                 .requestMatchers("/admin").hasRole("ADMIN").anyRequest().authenticated());
-        http.addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
         http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
-
+        http.addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
         http.sessionManagement((session) -> session.sessionCreationPolicy((SessionCreationPolicy.STATELESS)));
 
         return http.build();
