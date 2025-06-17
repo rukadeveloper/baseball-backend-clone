@@ -45,6 +45,9 @@ public class UserController {
         GrantedAuthority auth = iter.next();
         String role = auth.getAuthority();
 
+        System.out.println(username);
+        System.out.println(role);
+
         return ApiResponseDTO.success(MessageType.RETRIEVE, new LoginResponseDTO(username, role));
     }
 
