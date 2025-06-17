@@ -1,0 +1,7 @@
+암호화된 정보 가득 토큰
+
+토큰 생성 & 검증
+
+JWT : JSON 포맷을 이용하여 사용자 속성 저장하는 Claim 기반 웹 토큰
+
+JWT 구조 : Header , Payload, Signature

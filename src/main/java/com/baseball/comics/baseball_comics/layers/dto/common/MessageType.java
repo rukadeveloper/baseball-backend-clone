@@ -11,7 +11,8 @@ public enum MessageType {
     CREATE("생성이 완료되었습니다."),
     UPDATE("수정이 완료되었습니다."),
     DELETE("삭제가 완료되었습니다"),
-    SEND("요청이 완료되었습니다");
+    SEND("요청이 완료되었습니다"),
+    FAIL("실패했습니다");
 
     private final String message;
 }

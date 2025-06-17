@@ -32,23 +32,14 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-	// jwt
-	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
-	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
-	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
-
+	// security
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
-	// jakarta
-	implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
-
-	// 크롤링 라이브러리
-	implementation("org.jsoup:jsoup:latest.release")
-	// 셀리니움 라이브러리
-	implementation("org.seleniumhq.selenium:selenium-java:latest.release")
-
-	// javax
-	implementation("org.springframework.boot:spring-boot-starter-validation")
+	// jwt
+	implementation("io.jsonwebtoken:jjwt-api:0.12.3")
+	implementation("io.jsonwebtoken:jjwt-impl:0.12.3")
+	implementation("io.jsonwebtoken:jjwt-jackson:0.12.3")
+	implementation("io.jsonwebtoken:jjwt:0.9.1")
 }
 
 springBoot {
