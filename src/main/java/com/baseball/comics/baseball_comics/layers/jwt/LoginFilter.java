@@ -55,7 +55,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
      @Override
      protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException fail) {
-        response.setStatus(401);
-        System.out.println("로그인 실패: " + fail.getMessage()); // 서버 콘솔에만 메시지 출력
+         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401
+         System.out.println("로그인 실패: " + fail.getMessage()); // 서버 콘솔에만 메시지 출력
      }
 }
