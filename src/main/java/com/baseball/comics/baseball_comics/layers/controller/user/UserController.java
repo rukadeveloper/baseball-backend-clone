@@ -47,6 +47,7 @@ public class UserController {
         return ApiResponseDTO.success(MessageType.RETRIEVE, new LoginResponseDTO(username, role));
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/nest/check/id")
     public ApiResponseDTO<NestCheckResponseDTO> checkIdNested(NestCheckDTO nestCheckDTO) {
         Boolean isExisted = userService.nestCheck(nestCheckDTO.getUid());
