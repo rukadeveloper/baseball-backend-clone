@@ -58,4 +58,12 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public String getUname() {
+        return userEntity.getUname();
+    }
+
+    public String getUemail() {
+        return userEntity.getUemail();
+    }
 }

@@ -3,6 +3,7 @@ package com.baseball.comics.baseball_comics.layers.controller.user;
 import com.baseball.comics.baseball_comics.layers.dto.common.ApiResponseDTO;
 import com.baseball.comics.baseball_comics.layers.dto.common.MessageType;
 import com.baseball.comics.baseball_comics.layers.dto.join.*;
+import com.baseball.comics.baseball_comics.layers.dto.userDetails.CustomUserDetails;
 import com.baseball.comics.baseball_comics.layers.repository.User.UserEntity;
 import com.baseball.comics.baseball_comics.layers.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,11 @@ public class UserController {
     public ApiResponseDTO<LoginResponseDTO> getLoginData() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        String uname = userDetails.getUname();
+        String uemail = userDetails.getUemail();
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iter = authorities.iterator();
@@ -47,8 +52,9 @@ public class UserController {
 
         System.out.println(username);
         System.out.println(role);
+        System.out.println(uname);
 
-        return ApiResponseDTO.success(MessageType.RETRIEVE, new LoginResponseDTO(username, role));
+        return ApiResponseDTO.success(MessageType.RETRIEVE, new LoginResponseDTO(username, uname, uemail, role));
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

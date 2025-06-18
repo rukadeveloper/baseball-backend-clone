@@ -38,6 +38,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
      protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse repsonse, FilterChain chain,Authentication authentication) throws IOException {
          CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
          String username = customUserDetails.getUsername();
+         String uname = customUserDetails.getUname();
+         String uemail = customUserDetails.getUemail();
 
          Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
          Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
@@ -45,7 +47,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
          String role = auth.getAuthority();
 
-         String token = jwtUtil.createJwt(username, role, 60*60*10L);
+         String token = jwtUtil.createJwt(username, role, uname, uemail, 60*60*10L);
 
          repsonse.addHeader("Authorization", "Bearer " + token);
          repsonse.setContentType("application/json");
