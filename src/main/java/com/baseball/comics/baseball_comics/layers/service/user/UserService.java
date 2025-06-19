@@ -60,6 +60,8 @@ public class UserService {
         userEntity.setPassword(bCryptPasswordEncoder.encode(updateDTO.getPassword()));
         userEntity.setUname(updateDTO.getName());
         userEntity.setUemail(updateDTO.getEmail());
+        userEntity.setUphone(updateDTO.getPhone());
+        userEntity.setProfile(updateDTO.getProfile());
 
         userJpaRepository.save(userEntity);
     }
