@@ -65,4 +65,12 @@ public class UserController {
 
         return ApiResponseDTO.success(MessageType.RETRIEVE, new NestCheckResponseDTO(isExisted));
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/update")
+    public ApiResponseDTO<String> updateInfo(UpdateDTO updateDTO) {
+        userService.updateInfo(updateDTO);
+        return ApiResponseDTO.success(MessageType.UPDATE, "업데이트 완료");
+    }
+
 }

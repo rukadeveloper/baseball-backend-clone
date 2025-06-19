@@ -2,6 +2,7 @@ package com.baseball.comics.baseball_comics.layers.service.user;
 
 import com.baseball.comics.baseball_comics.layers.dto.join.JoinDTO;
 import com.baseball.comics.baseball_comics.layers.dto.join.JoinResponseDTO;
+import com.baseball.comics.baseball_comics.layers.dto.join.UpdateDTO;
 import com.baseball.comics.baseball_comics.layers.repository.User.UserEntity;
 import com.baseball.comics.baseball_comics.layers.repository.User.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -45,5 +46,14 @@ public class UserService {
             return false;
         }
         return true;
+    }
+
+    public void updateInfo(UpdateDTO updateDTO) {
+        UserEntity userEntity = userJpaRepository.findByUid(updateDTO.getUserId());
+        userEntity.setPassword(updateDTO.getPassword());
+        userEntity.setUname(updateDTO.getName());
+        userEntity.setUemail(updateDTO.getEmail());
+
+        userJpaRepository.save(userEntity);
     }
 }
