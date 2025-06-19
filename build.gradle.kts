@@ -47,6 +47,8 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 
 	implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
+
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
 springBoot {
