@@ -1,6 +1,7 @@
 # 빌드 결과물 무시
 /build/
 /out/
+*.jar
 
 # IDE 설정 무시
 /.idea/
