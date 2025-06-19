@@ -1,7 +1,9 @@
 package com.baseball.comics.baseball_comics.layers.controller.user;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.baseball.comics.baseball_comics.layers.dto.common.ApiResponseDTO;
 import com.baseball.comics.baseball_comics.layers.dto.common.MessageType;
 import com.baseball.comics.baseball_comics.layers.dto.join.*;
@@ -108,7 +110,7 @@ public class UserController {
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentType(file.getContentType());
             metadata.setContentLength(file.getSize());
-            amazonS3.putObject(bucket, fileName, file.getInputStream(), metadata);
+            amazonS3.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), metadata).withCannedAcl(CannedAccessControlList.PublicRead));
             String fileUrl = "https://" + bucket + ".s3.amazonaws.com/" + fileName;
             return ApiResponseDTO.success(MessageType.CREATE, new ImgPathResponseDTO(fileUrl));
         } catch (IOException e) {
