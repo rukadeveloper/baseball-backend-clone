@@ -4,6 +4,7 @@ import com.baseball.comics.baseball_comics.layers.dto.userDetails.CustomUserDeta
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,8 @@ import java.util.Iterator;
 
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
      private final AuthenticationManager authenticationManager;
+
+     @Qualifier("jwtUtils")
      private final JWTUtil jwtUtil;
 
      public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
