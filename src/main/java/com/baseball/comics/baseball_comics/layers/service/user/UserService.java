@@ -59,7 +59,7 @@ public class UserService {
     }
 
     public String findId(FindIdDTO findIdDTO) {
-        UserEntity entity = userJpaRepository.findByName(findIdDTO.getName());
+        UserEntity entity = userJpaRepository.findByUname(findIdDTO.getName());
         return entity.getUid();
     }
 }
