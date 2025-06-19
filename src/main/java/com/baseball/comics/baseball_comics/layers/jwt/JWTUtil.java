@@ -51,6 +51,7 @@ public class JWTUtil {
     }
 
     public String createJwt(String username,String encodedPassword, String role, String uname, String uemail, String phone, String profile, Long expiredMs) {
+        System.out.println("Secret Key : " + secretKey);
         return Jwts.builder().claim("username", username).claim("password", encodedPassword).claim("role", role).claim("uname", uname).claim("uemail", uemail).claim("phone",phone).claim("profile", profile).issuedAt(new Date(System.currentTimeMillis())).expiration(new Date(System.currentTimeMillis() + expiredMs)).signWith(secretKey).compact();
     }
 }
