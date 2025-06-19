@@ -66,4 +66,12 @@ public class CustomUserDetails implements UserDetails {
     public String getUemail() {
         return userEntity.getUemail();
     }
+
+    public String getPhone() {
+        return userEntity.getUphone();
+    }
+
+    public String getProfile() {
+        return userEntity.getProfile();
+    }
 }

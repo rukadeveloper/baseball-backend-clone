@@ -37,11 +37,20 @@ public class JWTUtil {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("role", String.class);
     }
 
+    public String getPhone(String token) {
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("phone", String.class);
+    }
+
+    public String getProfile(String token) {
+        return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("profile", String.class);
+    }
+
+
     public Boolean isExpired(String token) {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
     }
 
-    public String createJwt(String username,String encodedPassword, String role, String uname, String uemail, Long expiredMs) {
-        return Jwts.builder().claim("username", username).claim("password", encodedPassword).claim("role", role).claim("uname", uname).claim("uemail", uemail).issuedAt(new Date(System.currentTimeMillis())).expiration(new Date(System.currentTimeMillis() + expiredMs)).signWith(secretKey).compact();
+    public String createJwt(String username,String encodedPassword, String role, String uname, String uemail, String phone, String profile, Long expiredMs) {
+        return Jwts.builder().claim("username", username).claim("password", encodedPassword).claim("role", role).claim("uname", uname).claim("uemail", uemail).claim("phone",phone).claim("profile", profile).issuedAt(new Date(System.currentTimeMillis())).expiration(new Date(System.currentTimeMillis() + expiredMs)).signWith(secretKey).compact();
     }
 }

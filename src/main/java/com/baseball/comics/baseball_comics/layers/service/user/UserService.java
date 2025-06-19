@@ -25,6 +25,8 @@ public class UserService {
         String email = joinDTO.getEmail();
         String name = joinDTO.getName();
         String phone = joinDTO.getPhone();
+        String profile = joinDTO.getProfile();
+
 
         Boolean isExist = userJpaRepository.existsByUid(uid);
 
@@ -38,6 +40,7 @@ public class UserService {
         userEntity.setUemail(email);
         userEntity.setUname(name);
         userEntity.setUphone(phone);
+        userEntity.setProfile(profile);
 
         userJpaRepository.save(userEntity);
 

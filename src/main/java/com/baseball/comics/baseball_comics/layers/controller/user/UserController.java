@@ -60,6 +60,8 @@ public class UserController {
         String uname = userDetails.getUname();
         String uemail = userDetails.getUemail();
         String password = userDetails.getPassword();
+        String phone = userDetails.getPhone();
+        String profile = userDetails.getProfile();
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iter = authorities.iterator();
@@ -70,7 +72,7 @@ public class UserController {
         System.out.println(role);
         System.out.println(uname);
 
-        return ApiResponseDTO.success(MessageType.RETRIEVE, new LoginResponseDTO(username, password, uname, uemail, role));
+        return ApiResponseDTO.success(MessageType.RETRIEVE, new LoginResponseDTO(username, password, uname, uemail, role, phone, profile));
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
