@@ -44,6 +44,7 @@ public class UserController {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String uname = userDetails.getUname();
         String uemail = userDetails.getUemail();
+        String password = userDetails.getPassword();
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iter = authorities.iterator();
@@ -54,7 +55,7 @@ public class UserController {
         System.out.println(role);
         System.out.println(uname);
 
-        return ApiResponseDTO.success(MessageType.RETRIEVE, new LoginResponseDTO(username, uname, uemail, role));
+        return ApiResponseDTO.success(MessageType.RETRIEVE, new LoginResponseDTO(username, password, uname, uemail, role));
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
