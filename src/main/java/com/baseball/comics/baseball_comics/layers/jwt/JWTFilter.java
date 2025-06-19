@@ -53,6 +53,8 @@ public class JWTFilter extends OncePerRequestFilter {
         String role = jwtUtil.getRole(token);
         String uname = jwtUtil.getName(token);
         String uemail = jwtUtil.getEmail(token);
+        String phone = jwtUtil.getPhone(token);
+        String profile = jwtUtil.getProfile(token);
 
         UserEntity userEntity = new UserEntity();
         userEntity.setUid(username);
@@ -60,6 +62,8 @@ public class JWTFilter extends OncePerRequestFilter {
         userEntity.setRole(role);
         userEntity.setUname(uname);
         userEntity.setUemail(uemail);
+        userEntity.setUphone(phone);
+        userEntity.setProfile(profile);
 
         CustomUserDetails customUserDetails = new CustomUserDetails(userEntity);
 
