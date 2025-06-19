@@ -1,11 +1,9 @@
 package com.baseball.comics.baseball_comics.layers.service.user;
 
-import com.baseball.comics.baseball_comics.layers.Exception.common.CommonException;
 import com.baseball.comics.baseball_comics.layers.dto.join.FindIdDTO;
 import com.baseball.comics.baseball_comics.layers.dto.join.JoinDTO;
 import com.baseball.comics.baseball_comics.layers.dto.join.JoinResponseDTO;
 import com.baseball.comics.baseball_comics.layers.dto.join.UpdateDTO;
-import com.baseball.comics.baseball_comics.layers.enums.common.CommonError;
 import com.baseball.comics.baseball_comics.layers.repository.User.UserEntity;
 import com.baseball.comics.baseball_comics.layers.repository.User.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("userServiceV1")
 @RequiredArgsConstructor
 public class UserService {
     private final UserJpaRepository userJpaRepository;

@@ -36,7 +36,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         String token = authorization.split(" ")[1];
 
-        if(path.equals("/find/id")) {
+        if(path.equals("/find/id") || path.equals("/upload")) {
             filterChain.doFilter(request, response);
             return;
         }
