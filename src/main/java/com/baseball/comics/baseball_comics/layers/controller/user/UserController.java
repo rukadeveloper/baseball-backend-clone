@@ -73,4 +73,11 @@ public class UserController {
         return ApiResponseDTO.success(MessageType.UPDATE, "업데이트 완료");
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/find/id")
+    public ApiResponseDTO<FindIdResponseDTO> findId(FindIdDTO findIdDTO) {
+        String userId = userService.findId(findIdDTO);
+        return ApiResponseDTO.success(MessageType.SEND, new FindIdResponseDTO(userId));
+    }
+
 }

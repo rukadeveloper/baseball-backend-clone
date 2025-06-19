@@ -1,5 +1,6 @@
 package com.baseball.comics.baseball_comics.layers.service.user;
 
+import com.baseball.comics.baseball_comics.layers.dto.join.FindIdDTO;
 import com.baseball.comics.baseball_comics.layers.dto.join.JoinDTO;
 import com.baseball.comics.baseball_comics.layers.dto.join.JoinResponseDTO;
 import com.baseball.comics.baseball_comics.layers.dto.join.UpdateDTO;
@@ -55,5 +56,10 @@ public class UserService {
         userEntity.setUemail(updateDTO.getEmail());
 
         userJpaRepository.save(userEntity);
+    }
+
+    public String findId(FindIdDTO findIdDTO) {
+        UserEntity entity = userJpaRepository.findByName(findIdDTO.getName());
+        return entity.getUid();
     }
 }
