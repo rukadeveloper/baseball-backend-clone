@@ -27,4 +27,6 @@ public class UserEntity {
     private String uphone;
 
     private String role;
+
+    private String profileImgPath;
 }

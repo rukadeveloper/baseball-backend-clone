@@ -1,5 +1,7 @@
 package com.baseball.comics.baseball_comics.layers.controller.user;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.baseball.comics.baseball_comics.layers.dto.common.ApiResponseDTO;
 import com.baseball.comics.baseball_comics.layers.dto.common.MessageType;
 import com.baseball.comics.baseball_comics.layers.dto.join.*;
@@ -7,12 +9,16 @@ import com.baseball.comics.baseball_comics.layers.dto.userDetails.CustomUserDeta
 import com.baseball.comics.baseball_comics.layers.repository.User.UserEntity;
 import com.baseball.comics.baseball_comics.layers.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -25,6 +31,10 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
+    private final AmazonS3 amazonS3;
+
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/join")
@@ -91,4 +101,21 @@ public class UserController {
 
     }
 
+    @ExceptionHandler(Exception.class)
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/upload")
+    public ApiResponseDTO<ProfileImgResponseDTO> uploadProfile(@RequestParam("file")MultipartFile file) throws IOException {
+        try {
+            String fileName = file.getOriginalFilename();
+            ObjectMetadata metadata = new ObjectMetadata();
+            metadata.setContentType(file.getContentType());
+            metadata.setContentLength(file.getSize());
+            amazonS3.putObject(bucket, fileName, file.getInputStream(), metadata);
+            String fileUrl = "https://" + bucket + ".s3.amazonaws.com/" + fileName;
+            return ApiResponseDTO.success(MessageType.CREATE, new ProfileImgResponseDTO(fileUrl));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ApiResponseDTO.fail(MessageType.FAIL, new ProfileImgResponseDTO("업로드 실패"));
+        }
+    }
 }

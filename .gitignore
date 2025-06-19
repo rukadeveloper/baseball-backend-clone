@@ -5,6 +5,7 @@
 # IDE 설정 무시
 /.idea/
 /.vscode/
+application.properties
 
 # OS별 무시 파일
 .DS_Store
