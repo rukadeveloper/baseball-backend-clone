@@ -54,7 +54,6 @@ public class UserController {
     public ApiResponseDTO<LoginResponseDTO> getLoginData() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String uname = userDetails.getUname();

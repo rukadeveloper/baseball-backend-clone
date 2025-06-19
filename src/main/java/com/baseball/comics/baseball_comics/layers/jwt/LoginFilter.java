@@ -44,6 +44,8 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
          String password = customUserDetails.getPassword();
          String uname = customUserDetails.getUname();
          String uemail = customUserDetails.getUemail();
+         String phone = customUserDetails.getPhone();
+         String profile = customUserDetails.getProfile();
 
          Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
          Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
@@ -51,7 +53,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
          String role = auth.getAuthority();
 
-         String token = jwtUtil.createJwt(username, password, role, uname, uemail, 60*60*10L);
+         String token = jwtUtil.createJwt(username, password, role, uname, uemail, phone, profile, 60*60*10L);
 
          repsonse.addHeader("Authorization", "Bearer " + token);
          repsonse.setContentType("application/json");
