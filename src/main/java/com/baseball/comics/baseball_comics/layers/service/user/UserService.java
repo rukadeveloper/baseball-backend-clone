@@ -29,7 +29,7 @@ public class UserService {
 
         userEntity.setUid(uid);
         userEntity.setPassword(bCryptPasswordEncoder.encode(pwd));
-        userEntity.setRole("ROLE_ADMIN");
+        userEntity.setRole("ROLE_USER");
         userEntity.setUemail(email);
         userEntity.setUname(name);
         userEntity.setUphone(phone);
