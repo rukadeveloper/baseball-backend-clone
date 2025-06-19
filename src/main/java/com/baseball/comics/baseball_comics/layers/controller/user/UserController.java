@@ -103,6 +103,7 @@ public class UserController {
 
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/upload")
     public ApiResponseDTO<ImgPathResponseDTO> upload(@RequestParam("file") MultipartFile file) {
         try {
