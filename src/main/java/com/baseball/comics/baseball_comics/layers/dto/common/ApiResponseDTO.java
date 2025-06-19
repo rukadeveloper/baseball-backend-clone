@@ -30,4 +30,9 @@ public class ApiResponseDTO<T> {
         return ApiResponseDTO.<T>builder().status("fail").message(messageType.getMessage())
                 .timestamp(LocalDateTime.now()).build();
     }
+
+    public static <T> ApiResponseDTO<T> fail(MessageType messageType, T data) {
+        return ApiResponseDTO.<T>builder().status("fail").message(messageType.getMessage()).data(data)
+                .timestamp(LocalDateTime.now()).build();
+    }
 }

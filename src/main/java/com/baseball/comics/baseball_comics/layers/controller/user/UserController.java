@@ -13,8 +13,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @ResponseBody
@@ -75,9 +78,17 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/find/id")
-    public ApiResponseDTO<FindIdResponseDTO> findId(FindIdDTO findIdDTO) {
-        String userId = userService.findId(findIdDTO);
-        return ApiResponseDTO.success(MessageType.SEND, new FindIdResponseDTO(userId));
+    public ApiResponseDTO<List<FindIdResponseDTO>> findId(FindIdDTO findIdDTO) {
+        List<UserEntity> entities = userService.findId(findIdDTO);
+        List<FindIdResponseDTO> lists = new ArrayList<>();
+        if(entities == null) {
+            lists.add(new FindIdResponseDTO("아이디가 없습니다"));
+            return ApiResponseDTO.fail(MessageType.FAIL, lists);
+        } else {
+            List<FindIdResponseDTO> newEntities = entities.stream().map(v -> new FindIdResponseDTO(v.getUid())).collect(Collectors.toList());
+            return ApiResponseDTO.success(MessageType.RETRIEVE, newEntities);
+        }
+
     }
 
 }

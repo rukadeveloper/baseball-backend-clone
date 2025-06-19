@@ -1,14 +1,19 @@
 package com.baseball.comics.baseball_comics.layers.service.user;
 
+import com.baseball.comics.baseball_comics.layers.Exception.common.CommonException;
 import com.baseball.comics.baseball_comics.layers.dto.join.FindIdDTO;
 import com.baseball.comics.baseball_comics.layers.dto.join.JoinDTO;
 import com.baseball.comics.baseball_comics.layers.dto.join.JoinResponseDTO;
 import com.baseball.comics.baseball_comics.layers.dto.join.UpdateDTO;
+import com.baseball.comics.baseball_comics.layers.enums.common.CommonError;
 import com.baseball.comics.baseball_comics.layers.repository.User.UserEntity;
 import com.baseball.comics.baseball_comics.layers.repository.User.UserJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -58,8 +63,17 @@ public class UserService {
         userJpaRepository.save(userEntity);
     }
 
-    public String findId(FindIdDTO findIdDTO) {
-        UserEntity entity = userJpaRepository.findByUname(findIdDTO.getName());
-        return entity.getUid();
+    public List<UserEntity> findId(FindIdDTO findIdDTO) {
+        List<UserEntity> array = new ArrayList<>();
+        List<UserEntity> list = userJpaRepository.findByUname(findIdDTO.getName());
+        for(UserEntity entity: list ) {
+            array.add(entity);
+        }
+        if (list == null) {
+            // 예외 처리 또는 에러 메시지 반환
+             return null;
+        } else {
+             return list;
+        }
     }
 }
