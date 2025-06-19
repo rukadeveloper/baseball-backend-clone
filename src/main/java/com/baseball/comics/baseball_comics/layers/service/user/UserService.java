@@ -50,7 +50,7 @@ public class UserService {
 
     public void updateInfo(UpdateDTO updateDTO) {
         UserEntity userEntity = userJpaRepository.findByUid(updateDTO.getUserId());
-        userEntity.setPassword(updateDTO.getPassword());
+        userEntity.setPassword(bCryptPasswordEncoder.encode(updateDTO.getPassword()));
         userEntity.setUname(updateDTO.getName());
         userEntity.setUemail(updateDTO.getEmail());
 
